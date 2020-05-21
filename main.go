@@ -9,12 +9,14 @@ import (
 )
 
 type config struct {
-	Addr string `json:"addr"`
+	Addr     string `json:"addr"`
+	MongoURL string `json:"mongo_url"`
 }
 
 func main() {
 	c := new(config)
 	flag.StringVar(&c.Addr, "addr", envString("ADDR", ":80"), "address for listening")
+	flag.StringVar(&c.MongoURL, "mongo_url", envString("MONGO_URL", "default mongo URL"), "mongoDB connection string")
 	flag.Parse()
 
 	log.Printf("config %+v", c)
